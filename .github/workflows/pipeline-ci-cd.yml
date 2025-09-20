@@ -29,6 +29,16 @@ jobs:
       - name: run unit test
         run: npm run test 
 
+     # ✅ Docker build
+   
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone source code 
+        uses: actions/checkoutactions/checkout@v4
+          
+
+
    
        
     
