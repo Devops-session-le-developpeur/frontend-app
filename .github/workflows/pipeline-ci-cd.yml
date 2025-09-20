@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: clone Source Code
-        uses: actions/checkoutactions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -31,11 +31,11 @@ jobs:
 
      # ✅ Docker build
    
-  build-docker-image:
-    runs-on: ubuntu-latest
-    steps:
-      - name: clone source code 
-        uses: actions/checkoutactions/checkout@v4
+  # build-docker-image:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: clone source code 
+  #       uses: actions/checkoutactions/checkout@v4
           
 
 
