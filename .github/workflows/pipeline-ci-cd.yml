@@ -9,7 +9,7 @@ on:
 
 # ✅ Global Environment Variables
 env:
-  Docker_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/frontfontend-app
+  Docker_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/fontend-app
   VITE_API_URL: https://backend.app.26.lebondeveloppeur.net
 jobs:
   # ✅ Run Unit Tests
@@ -40,13 +40,18 @@ jobs:
 
       - name: build docker image
         run: docker build -t  ${{ env.Docker_IMAGE }} --build-arg VITE_API_URL=${{ env.VITE_API_URL }} .
+      - run: docker tag ${{ env.Docker_IMAGE }} ${{ env.Docker_IMAGE }}:v${{ github.run_number }} 
       - name: login to docker hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: push docker hub image  latest version 
+        run: docker push ${{ env.Docker_IMAGE }}:v${{ github.run_number }} 
+    
       - name: Push Docker image
-        run: docker push ${{ env.Docker_IMAGE }}
+        run: docker push ${{ env.Docker_IMAGE }}:latest  
 
   deploy-to-vps:
         runs-on: ubuntu-latest
